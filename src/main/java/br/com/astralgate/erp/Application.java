@@ -26,22 +26,13 @@ public class Application {
 					.filter(produtos -> produtos instanceof Produto)
 					.collect(Collectors.toList());
 
-			System.out.println("Informe as opções que deseja como:\n 1-Cadastrar Produto \n 2-Vender Produto\n 3-Exibir itens\n 4-Sair");
+			System.out.println("Informe as opções que deseja como:\n 1-Cadastrar Produto \n 2-Vender Produto\n 3-Exibir itens\n 4-atualizar\n 5-remover item\n 6-pesquisar produto\n 7-Sair");
 			 opcao = sc.nextInt();
 			sc.nextLine();
 			switch (opcao) {
                 case 1 -> {
-					System.out.println("Informe o nome do item:\n");
-					String nome = sc.nextLine();
-					System.out.println("Informe o valor custo:\n ");
-					BigDecimal valorCusto = sc.nextBigDecimal();
-					sc.nextLine();
-					System.out.println("Informe o valor de venda do item\n");
-					BigDecimal valorVenda = sc.nextBigDecimal();
-					sc.nextLine();
-
-                    produto.add(new Peca(nome, valorVenda, valorCusto ));
-
+				Peca novaPeca = lerDadosProduto(sc);
+				produto.add(novaPeca);
 					break;
                 }
 				case 2 ->{
@@ -53,12 +44,14 @@ public class Application {
                         soProdutos.forEach(System.out::println);
                         System.out.println("Digite o id do produto que deseja vender: ");
                         Long id = sc.nextLong();
-                        sc.nextLine();
-                        if(produto.contains(id)){
-                            produto.remove(id);
-                            int index = produto.indexOf(id);
-                            System.out.println("Produto Vendido com sucesso " + produto.get(index));
-                        }
+						sc.nextLine();
+//                           int index = produto.indexOf(id);
+							boolean vendido = produto.removeIf(p -> p.getId().equals(id));
+							if(vendido) {
+								System.out.println("Produto Vendido com sucesso ");
+							}else{
+								System.out.println("Produto não encontrado no estoque");
+							}
                         break;
                     }
 				}
@@ -67,18 +60,52 @@ public class Application {
                     soProdutos.forEach(System.out::println);
                     break;
                 }
-				 case 4 -> {
-                     System.exit(0);
-                     break;
-                 }
+
+				case 4 -> {
+					System.out.println("Informe seu ID: ");
+					Long id = sc.nextLong();
+					sc.nextLine();
+					java.util.Optional<Produto> produtoBuscando = produto.stream().filter(p ->
+							p.getId().equals(id)).findFirst();
+					if(produtoBuscando.isPresent()){
+
+					}else{
+						System.out.println("Produto não encontrado");
+					}
+					break;
+				}
+				case 5 -> {
+
+					break;
+				}
+				case 6 -> {
+
+					break;
+				}
+				case 7 -> {
+
+					break;
+				}
 
 
             }
 
-		}while(opcao != 4);
+		}while(opcao != 7);
 
 
 }
+	private static Peca lerDadosProduto(Scanner sc) {
+		System.out.println("Informe o nome do item:\n");
+		String nome = sc.nextLine();
+		System.out.println("Informe o valor custo:\n ");
+		BigDecimal valorCusto = sc.nextBigDecimal();
+		sc.nextLine();
+		System.out.println("Informe o valor de venda do item\n");
+		BigDecimal valorVenda = sc.nextBigDecimal();
+		sc.nextLine();
+
+		return new Peca(nome,valorVenda,valorCusto);
+	};
 
 
 }
