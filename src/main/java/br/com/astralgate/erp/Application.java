@@ -53,12 +53,12 @@ public class Application {
                         soProdutos.forEach(System.out::println);
                         System.out.println("Digite o id do produto que deseja vender: ");
                         Long id = sc.nextLong();
+                        sc.nextLine();
                         if(produto.contains(id)){
                             produto.remove(id);
                             int index = produto.indexOf(id);
                             System.out.println("Produto Vendido com sucesso " + produto.get(index));
                         }
-                        produto.remove(1);
                         break;
                     }
 				}

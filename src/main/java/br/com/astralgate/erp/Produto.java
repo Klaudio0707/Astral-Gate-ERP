@@ -10,6 +10,7 @@ public class Produto  {
     private BigDecimal valorVenda;
     private BigDecimal valorCusto;
     private BigDecimal ValorTotalEstoque;
+
     public Produto (String nome, BigDecimal valorVenda, BigDecimal valorCusto){
         this.id =contador ++;
         this.nome = nome;
