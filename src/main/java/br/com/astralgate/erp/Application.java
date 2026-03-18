@@ -32,8 +32,7 @@ public class Application {
 			switch (opcao) {
                 case 1 -> {
 					System.out.println("Informe o nome do item:\n");
-					String nome = sc.next();
-					sc.nextLine();
+					String nome = sc.nextLine();
 					System.out.println("Informe o valor custo:\n ");
 					BigDecimal valorCusto = sc.nextBigDecimal();
 					sc.nextLine();
@@ -46,19 +45,39 @@ public class Application {
 					break;
                 }
 				case 2 ->{
-					produto.remove(1);
-					break;
+
+                    if(produto.isEmpty()){
+                        System.out.println("Estoque vazio. ");
+                    break;
+                    }else {
+                        soProdutos.forEach(System.out::println);
+                        System.out.println("Digite o id do produto que deseja vender: ");
+                        Long id = sc.nextLong();
+                        if(produto.contains(id)){
+                            produto.remove(id);
+                            int index = produto.indexOf(id);
+                            System.out.println("Produto Vendido com sucesso " + produto.get(index));
+                        }
+                        produto.remove(1);
+                        break;
+                    }
 				}
 				case 3 -> {
-					System.out.println("Exibir produtos\n ");
-					soProdutos.forEach(System.out::println);
-				break;
-				}
+                    System.out.println("Exibir produtos\n ");
+                    soProdutos.forEach(System.out::println);
+                    break;
+                }
+				 case 4 -> {
+                     System.exit(0);
+                     break;
+                 }
+
+
             }
 
 		}while(opcao != 4);
 
-    System.exit(0);
+
 }
 
 

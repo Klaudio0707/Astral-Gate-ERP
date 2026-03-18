@@ -5,12 +5,13 @@ import java.math.BigDecimal;
 public class Produto  {
 
     private Long id = 1L;
+    private static Long contador = 1l;
     private String nome;
     private BigDecimal valorVenda;
     private BigDecimal valorCusto;
     private BigDecimal ValorTotalEstoque;
     public Produto (String nome, BigDecimal valorVenda, BigDecimal valorCusto){
-        this.id =  getId() + 1;
+        this.id =contador ++;
         this.nome = nome;
         this.valorVenda = valorVenda;
         this.valorCusto = valorCusto;
