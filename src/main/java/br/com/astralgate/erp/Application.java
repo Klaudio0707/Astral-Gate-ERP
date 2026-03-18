@@ -56,9 +56,9 @@ public class Application {
 				}
             }
 
-		}while(opcao == 4);
+		}while(opcao != 4);
 
-
+    System.exit(0);
 }
 
 
