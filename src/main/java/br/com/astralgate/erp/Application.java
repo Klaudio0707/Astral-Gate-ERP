@@ -69,6 +69,12 @@ public class Application {
 							p.getId().equals(id)).findFirst();
 					if(produtoBuscando.isPresent()){
 
+						Produto produtoOriginal = produtoBuscando.get();
+						Peca dadosNovos = lerDadosProduto(sc);
+						produtoOriginal.setNome(dadosNovos.getNome());
+						produtoOriginal.setValorCusto(dadosNovos.getValorCusto());
+						produtoOriginal.setValorVenda(dadosNovos.getValorVenda());
+						System.out.println("Produto atualizado com sucesso!");
 					}else{
 						System.out.println("Produto não encontrado");
 					}
@@ -83,7 +89,7 @@ public class Application {
 					break;
 				}
 				case 7 -> {
-
+				System.exit(0);
 					break;
 				}
 
