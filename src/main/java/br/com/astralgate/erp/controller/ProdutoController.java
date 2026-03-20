@@ -1,17 +1,24 @@
 package br.com.astralgate.erp.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import br.com.astralgate.erp.entity.Produto;
+import br.com.astralgate.erp.repository.ProdutoRepository;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
 
-   public ProdutoController(){
+@Autowired
+private ProdutoRepository produtoRepository;
 
+   @GetMapping
+   public List<Produto> listarTodos(){
+      return produtoRepository.findAll();
    }
-//   public criar(){
-//      return"criar";
-//   }
+
 
 }
